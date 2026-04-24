@@ -1,0 +1,34 @@
+services:
+  - type: web
+    name: findecide-ai-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt && python data_generator.py && python ml_engine.py
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT --workers 2
+    plan: free
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false          # Set manually in Render dashboard
+      - key: LOG_LEVEL
+        value: info
+      - key: PYTHON_VERSION
+        value: "3.11.0"
+    healthCheckPath: /health
+
+  - type: web
+    name: findecide-ai-frontend
+    runtime: static
+    rootDir: frontend
+    staticPublishPath: .
+    buildCommand: echo "No build step needed"
+    envVars:
+      - key: FINDECIDE_API_URL
+        sync: false          # Set to your backend Render URL
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: no-cache
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

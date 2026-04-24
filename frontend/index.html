@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FinDecide AI — Financial Intelligence System</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+  <!-- Sidebar -->
+  <aside id="sidebar">
+    <div class="sb-header">
+      <div class="sb-logo">
+        <div class="sb-logo-icon">💠</div>
+        <div>
+          <div class="sb-logo-text">FinDecide AI</div>
+          <div class="sb-logo-sub">Financial Intelligence System</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-label">Session Analytics</div>
+      <div class="sb-metric"><span class="sb-metric-label">Queries processed</span><span class="sb-metric-val" id="stat-queries">0</span></div>
+      <div class="sb-metric"><span class="sb-metric-label">Predictions made</span><span class="sb-metric-val" id="stat-preds">0</span></div>
+      <div class="sb-metric"><span class="sb-metric-label">Approval rate</span><span class="sb-metric-val" id="stat-rate">—</span></div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-label">Quick Actions</div>
+      <button class="quick-btn" onclick="App.quickPrompt('Analyze my loan eligibility for ₹15L home loan with ₹75,000 monthly income and credit score 720')">🏠 Home Loan Analysis</button>
+      <button class="quick-btn" onclick="App.quickPrompt('What is the risk score for someone with ₹45,000 income, credit score 580 and ₹8,000/month existing debt?')">📊 Risk Assessment</button>
+      <button class="quick-btn" onclick="App.quickPrompt('Calculate EMI for ₹10 lakh loan at 8.5% for 5 years and show amortization breakdown')">🔢 EMI Calculator</button>
+      <button class="quick-btn" onclick="App.quickPrompt('What if my income increases to ₹90,000? How does it affect loan approval chances?')">🔀 What-If Analysis</button>
+      <button class="quick-btn" onclick="App.quickPrompt('What factors affect loan rejection and how do I improve my approval chances?')">📚 Credit Education</button>
+      <button class="quick-btn" onclick="App.openEMIPanel()">⚡ Advanced EMI Tool</button>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-label">Prediction History</div>
+      <div id="hist-list"><div class="empty-state">No predictions yet</div></div>
+    </div>
+
+    <div class="sb-footer">
+      <div class="footer-info">Powered by Claude AI + ML Engine</div>
+      <button class="hbtn full-width" onclick="App.clearChat()">🗑 Clear conversation</button>
+    </div>
+  </aside>
+
+  <!-- Main Chat -->
+  <main id="main">
+    <header id="chat-header">
+      <div class="chat-title">
+        <div class="status-dot"></div>
+        Financial AI Assistant
+      </div>
+      <div class="header-actions">
+        <button class="hbtn" id="model-stats-btn" onclick="App.showModelStats()">📊 Model Stats</button>
+        <button class="hbtn" onclick="App.openLoanPanel()">+ Loan Application</button>
+        <button class="hbtn" onclick="App.openEMIPanel()">EMI Calculator</button>
+      </div>
+    </header>
+
+    <div id="messages"></div>
+
+    <div id="input-area">
+      <div class="input-row">
+        <textarea id="user-input"
+          placeholder="Ask about loans, risk scores, EMI, what-if scenarios..."
+          rows="1"></textarea>
+        <button id="send-btn" onclick="App.sendMessage()">➤</button>
+      </div>
+      <div class="input-hint">
+        Try: "Analyze loan for ₹60K income, credit score 700" · "EMI for ₹20L at 9% for 20 years"
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Panel Overlay -->
+<div id="panel-overlay">
+  <div id="panel">
+    <div id="panel-content"></div>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
