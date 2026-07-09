@@ -103,7 +103,7 @@ class FinancialChatbot:
             raise ValueError("ANTHROPIC_API_KEY environment variable not set")
 
         self.client = Anthropic(api_key=api_key)
-        self.model = "claude-sonnet-4-20250514"
+        self.model = "self.model = "claude-3-5-sonnet-latest""
 
         # ✅ ADD THIS (connect ML)
         self.ml_engine = LoanMLEngine()
